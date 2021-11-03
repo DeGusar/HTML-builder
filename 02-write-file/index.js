@@ -15,8 +15,9 @@ stdout.write('Privet! Write some text...\n');
 rl.on('line', line => {
     if (line === 'exit') {
         rl.close()
+    } else {
+        newText.write(`${line}\n`)
     }
-    else  newText.write(line)
 })
 
 process.on('exit', () => stdout.write('Удачи в изучении Node.js!'));
