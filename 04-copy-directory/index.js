@@ -9,7 +9,6 @@ fs.promises.readdir(pathSrc).then(file => {
     file.forEach(item => {
         fs.promises.copyFile(path.join(pathSrc,item), path.join(pathDest,item))
     })
-
  
 fs.promises.readdir(pathDest).then(filesDest => {
     filesDest.forEach(itemDest => {
