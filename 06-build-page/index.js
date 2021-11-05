@@ -9,8 +9,13 @@ let pathTemplate = path.join(__dirname,'template.html')
 fs.promises.mkdir(pathDest, { recursive: true });
 fs.stat(path.join(pathDest, 'assets'), function (error) {
     if (!error) {
-        fs.promises.rm(path.join(pathDest, 'assets'), {recursive: true})
-    } else return
+        fs.promises.rm(path.join(pathDest, 'assets'), { recursive: true }).then(result => {
+            fs.promises.mkdir(path.join(pathDest, 'assets'), { recursive: true });
+            duplicate(pathAssets,path.join(pathDest, 'assets'))
+        })
+    } else {
+        fs.promises.mkdir(path.join(pathDest, 'assets'), { recursive: true });
+        duplicate(pathAssets,path.join(pathDest, 'assets'))}
 }) 
 
 fs.promises.readFile(pathTemplate, 'utf-8').then(result => {
@@ -62,5 +67,3 @@ function duplicate(srcFolder, destFolder) {
     })
 }
 
-fs.promises.mkdir(path.join(pathDest, 'assets'), { recursive: true });
-duplicate(pathAssets,path.join(pathDest, 'assets'))
