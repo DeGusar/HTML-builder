@@ -19,7 +19,7 @@ fs.stat(path.join(pathDest, 'assets'), function (error) {
 }) 
 
 fs.promises.readFile(pathTemplate, 'utf-8').then(result => {
-    let tags = result.match(/{{(.*)}}/gi);
+    let tags = result.match(/{{([a-z]*)}}/gi);
     tags.forEach(item => {
       let  tag = item.replace(/([^a-z]*)/gi, '');
         fs.promises.readFile(path.join(pathComponents, `${tag}.html`),'utf-8').then(comp => {
