@@ -5,9 +5,9 @@ pathFolder = path.join(__dirname, 'secret-folder');
 fs.promises.readdir(pathFolder, {withFileTypes: true}).then(filenames => {
     filenames.forEach(item => {
         if (item.isFile()) {
-           let dividedName =  item.name.split('.')
-            fs.promises.stat(path.join(pathFolder, item.name)).then(stats => {
-                console.log(`${dividedName[0]} - ${dividedName[dividedName.length - 1]} - ${stats.size}b`);
+            let itemPath = path.join(pathFolder, item.name);
+            fs.promises.stat(itemPath).then(stats => {
+                console.log(`${path.basename(itemPath, path.extname(itemPath))} - ${path.extname(itemPath).slice(1)} - ${stats.size}b`);
            }) 
      }
   })
